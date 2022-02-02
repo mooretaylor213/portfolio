@@ -18,6 +18,7 @@ import(
 	"log"
 	"strconv"
 	"strings"
+	"math"
 )
 
 func main(){
@@ -30,53 +31,76 @@ func main(){
 	var hourCalsRun float64=450.0
 	var hourCalsSwim float64=275.0
 
-	// User Input Using Readers
-	fmt.Print("How many hours have you spent cycling this week? ")
-	reader1 := bufio.NewReader(os.Stdin)
-	input1,err := reader1.ReadString('\n')
-	fmt.Print("How many hours have you spent running this week? ")
-	reader2 := bufio.NewReader(os.Stdin)
-	input2,err := reader2.ReadString('\n')
-	fmt.Print("How many hours have you spent swimming this week? ")
-	reader3 := bufio.NewReader(os.Stdin)
-	input3,err := reader3.ReadString('\n')
-
-	// Checks for errors and terminates the program if any are found. 
-	if err!=nil{
-		log.Fatal(err)
-	}
-
-	/*
-	Trimming space to avoid ParseFloat syntax errors and converting the
-	user inputs to the 'float64' variable type rather than the default
-	'string' variable type. 
-	*/
-
-	input1 = strings.TrimSpace(input1)
-	cyclingHours,err:=strconv.ParseFloat(input1,64)
-	input2 = strings.TrimSpace(input2)
-	runningHours,err:=strconv.ParseFloat(input2,64)
-	input3 = strings.TrimSpace(input3)
-	swimmingHours,err:=strconv.ParseFloat(input3,64)
-
-	// Checking for errors again.
-	if err!=nil{
-		log.Fatal(err)
-	}
-
-	// Calculations
-	cyclingCals = cyclingHours*hourCalsCyc
-	runningCals = runningHours* hourCalsRun
-	swimmingCals =swimmingHours*hourCalsSwim
-	totalCalories = cyclingCals + runningCals + swimmingCals
-
+	// Asking the user how many triathletes they want to input.
+	fmt.Print("How many triathletes are there? ")
+	reader0 := bufio.NewReader(os.Stdin)
+	input0,err := reader0.ReadString('\n')
+	input0 = strings.TrimSpace(input0)
+	numTriathletes,err := strconv.ParseFloat(input0,64)
 	
-	// Rounding the value for weight loss to 2 decimal points. 
-	roundedWeightLoss:=fmt.Sprintf("%.2f",(totalCalories/3800))
-
-	// Output
+	//Checking for errors.
+	if err!=nil{
+		log.Fatal(err)
+	}
+	
+	
 	fmt.Println()
-	fmt.Println("Calories burned this week: ", totalCalories)
-	fmt.Println("Total pounds lost this week: ",roundedWeightLoss)
-}
+	
+	// Beginning of for loop. 
+	for i:=1.0;  i<=numTriathletes; {
+		fmt.Print("Athlete #",i,":")
+		fmt.Println()
+		fmt.Printf("Enter cycling hours: ")
+		reader1 := bufio.NewReader(os.Stdin)
+		input1,err := reader1.ReadString('\n')
+		fmt.Print("Enter running hours: ")
+		reader2 := bufio.NewReader(os.Stdin)
+		input2,err := reader2.ReadString('\n')
+		fmt.Print("Enter swimming hours: ")
+		reader3 := bufio.NewReader(os.Stdin)
+		input3,err := reader3.ReadString('\n')
 
+		// Checks for errors and terminates the program if any are found. 
+		if err!=nil{
+			log.Fatal(err)
+		}
+
+		/*
+		Trimming space to avoid ParseFloat syntax errors and converting the
+		user inputs to the 'float64' variable type rather than the default
+		'string' variable type. 
+		*/
+
+		input1 = strings.TrimSpace(input1)
+		cyclingHours,err:=strconv.ParseFloat(input1,64)
+		input2 = strings.TrimSpace(input2)
+		runningHours,err:=strconv.ParseFloat(input2,64)
+		input3 = strings.TrimSpace(input3)
+		swimmingHours,err:=strconv.ParseFloat(input3,64)
+
+		// Checking for errors again.
+		if err!=nil{
+			log.Fatal(err)
+		}
+
+		// Calculations
+		cyclingCals = cyclingHours*hourCalsCyc
+		runningCals = runningHours* hourCalsRun
+		swimmingCals =swimmingHours*hourCalsSwim
+		totalCalories = cyclingCals + runningCals + swimmingCals
+		weightLoss = totalCalories/3800
+
+		// Output
+		fmt.Println("Total calories: ",int(math.Round(totalCalories)))
+		fmt.Print("Pounds lost:  ")
+		fmt.Printf("%.2f",weightLoss)
+		fmt.Println()
+		fmt.Println()
+		
+		// Incrementing
+		i++;
+		
+		//End of for loop
+}
+}
+}
