@@ -20,51 +20,72 @@ import(
 	"strings"
 )
 
+
 func main(){
-	// Variable Declarations
-	var name string=""
+
+
+	// Variable Declaration
 	var copyCost float64=0.0
-
-	// User Input for Name 
-	fmt.Println("Welcome to Leo's Print Shoppe!")
-	fmt.Println()
-	fmt.Print("Enter your name: ")
-	reader:=bufio.NewReader(os.Stdin)
-	name,err:=reader.ReadString('\n')
 	
-	// Checking for errors, terminates the program if any are found. 
-	if err!=nil{
-		log.Fatal(err)
-	}
+	// Beginning loop
+	for{
+		//User Input for Name 
+		fmt.Print("Enter customer name: ")
+		reader:=bufio.NewReader(os.Stdin)
+		name,err:=reader.ReadString('\n')
+		
+		// Checking for errors, terminates the program if any are found. 
+		if err!=nil{
+			log.Fatal(err)
+		}
 
-	// User Input for Copies Needed
-	fmt.Print("How many copies do you need today? ")
-	reader2:=bufio.NewReader(os.Stdin)
-	input,err:=reader2.ReadString('\n')
+		// User Input for Copies Needed
+		fmt.Print("Enter number of copies: ")
+		reader2:=bufio.NewReader(os.Stdin)
+		input,err:=reader2.ReadString('\n')
+		
+		// Checking for errors, terminates the program if any are found. 
+		if err!=nil{
+			log.Fatal(err)
+		}
 	
-	// Checking for errors, terminates the program if any are found. 
-	if err!=nil{
-		log.Fatal(err)
+		input = strings.TrimSpace(input)
+		copies,err:=strconv.ParseFloat(input,64)
+
+		// Checking for errors, terminates the program if any are found.
+		if err != nil{
+			log.Fatal(err)
+		}
+
+		// Price Calculations
+		if (copies<=200){
+			copyCost = 0.10 * copies
+		}else{
+			copies = copies - 200
+			copyCost =(0.05 * copies) + 20.0
+		}
+
+		// Output
+		fmt.Print("Customer Name: ", name)
+		fmt.Print("Total Cost: $")
+		fmt.Printf("%.2f",copyCost)
+		fmt.Println()
+		fmt.Println()
+	
+		// Asking if the user wants to input another customer. 
+		fmt.Print("Another customer (Y/N)? ")
+		reader3:=bufio.NewReader(os.Stdin)
+		againResponse,err:=reader3.ReadString('\n')
+		againResponse = strings.TrimSpace(againResponse)
+		fmt.Println()
+
+		if againResponse=="N"{
+			break
+		}else{
+			continue
+	
+		}
+
+	// End loop	
 	}
-	input = strings.TrimSpace(input)
-	copies,err:=strconv.ParseFloat(input,64)
-
-	// Checking for errors, terminates the program if any are found.
-	if err != nil{
-		log.Fatal(err)
-	}
-
-	// Price Calculations
-	if (copies<=200){
-		copyCost = 0.10 * copies
-	}else{
-		copies = copies - 200
-		copyCost =(0.05 * copies) + 20.0
-	}
-
-	roundedCopyCost := fmt.Sprintf("%.2f",copyCost)
-
-	fmt.Println()
-	fmt.Print("Customer Name: ", name)
-	fmt.Println("Balance Due: $", roundedCopyCost)
 }
