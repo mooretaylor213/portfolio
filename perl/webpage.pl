@@ -34,6 +34,5 @@ print "<body>\n";
 print "<h1>Currency Conversion</h1>\n";
 print "<h2>Amount Entered: \$ $amount </h2>\n";
 print "<h2>Converted Amount: \$ $converted </h2>\n";
-#print "<p>Go back to my: <a href="index.html">Home Page</a></p>";
 print "</body>\n";
 print "</html>\n";
