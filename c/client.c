@@ -1,3 +1,8 @@
+/* Example TCP Client Program.
+ * Covered in Course - Computer Networking
+*/
+
+
 #include <sys/socket.h>
 #include <sys/types.h>
 
