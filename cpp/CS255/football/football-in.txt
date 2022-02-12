@@ -1,0 +1,18 @@
+Dan 
+Marino
+0 14 219 2 2
+Terry
+Bradshaw
+33 21 302 1 0
+Roger 
+Staubach
+24 12 244 0 1 
+Dak
+Prescott 
+42 30 300 3 1
+Tony 
+Romo
+33 12 250 0 1
+Tom 
+Brady
+35 14 220 1 1 
